@@ -77,14 +77,14 @@ public class WeixinApi {
 	// 创建二维码
 	private static final String POST_QRTICKET = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=%s";
 	// 拿到二维码
-	private static final String CREATE_QR = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=%s";
+	//private static final String CREATE_QR = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=%s";
 
 	public static QRTicket getQrTicket(QRTicketRequest request) throws Exception {
 		AccessToken token = getAccessToken();
-		String jsonRequet = JSONObject.toJSONString(request);
-		System.out.println(jsonRequet);
+		String jsonRequest = JSONObject.toJSONString(request);
+		System.out.println(jsonRequest);
 		String jsonResult = HttpUtil.sendHttpRequest(String.format(POST_QRTICKET, token.getAccess_token()), POST,
-				jsonRequet, CHARSET);
+				jsonRequest, CHARSET);
 		System.out.println(jsonResult);
 		return JSONObject.parseObject(jsonResult, QRTicket.class);
 
@@ -99,6 +99,22 @@ public class WeixinApi {
 		String jsonResult = HttpUtil.sendHttpRequest(String.format(POST_CUSTOMMSG, token.getAccess_token()), POST,
 				jsonRequet, CHARSET);
 		System.out.println(jsonResult);
+	}
+	
+	// 获取openid
+	private static final String POST_OPENID = "https://api.weixin.qq.com/sns/oauth2/%s?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+
+	public static String getOpenid(String code) throws Exception {
+		AccessToken token = getAccessToken();
+		String jsonResult = HttpUtil.sendHttpRequest(String.format(POST_OPENID, token.getAccess_token(),APPID,SECRET,code), GET,
+				null, CHARSET);
+		System.out.println(jsonResult);
+		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
+		if(result.getErrmsg()==null){
+			return null;
+		}
+		return result.getOpenid();
+
 	}
 
 	public static void main(String[] args) {
