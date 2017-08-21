@@ -110,7 +110,7 @@ public class WeixinApi {
 				null, CHARSET);
 		System.out.println(jsonResult);
 		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
-		if(result.getErrmsg()==null){
+		if(result.getErrcode()==null||result.getErrmsg()==null){
 			return null;
 		}
 		return result.getOpenid();

@@ -16,9 +16,11 @@ public class WxuserVO implements Serializable {
 
     private String username;
 
-    private String referrerid;
+    private Integer referrerid;
 
     private Integer role;
+
+    private Integer isdisplay;
 
     private Date createtime;
 
@@ -74,12 +76,12 @@ public class WxuserVO implements Serializable {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getReferrerid() {
+    public Integer getReferrerid() {
         return referrerid;
     }
 
-    public void setReferrerid(String referrerid) {
-        this.referrerid = referrerid == null ? null : referrerid.trim();
+    public void setReferrerid(Integer referrerid) {
+        this.referrerid = referrerid;
     }
 
     public Integer getRole() {
@@ -88,6 +90,14 @@ public class WxuserVO implements Serializable {
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public Integer getIsdisplay() {
+        return isdisplay;
+    }
+
+    public void setIsdisplay(Integer isdisplay) {
+        this.isdisplay = isdisplay;
     }
 
     public Date getCreatetime() {
@@ -120,6 +130,7 @@ public class WxuserVO implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", referrerid=").append(referrerid);
         sb.append(", role=").append(role);
+        sb.append(", isdisplay=").append(isdisplay);
         sb.append(", createtime=").append(createtime);
         sb.append(", changetime=").append(changetime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -147,6 +158,7 @@ public class WxuserVO implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getReferrerid() == null ? other.getReferrerid() == null : this.getReferrerid().equals(other.getReferrerid()))
             && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+            && (this.getIsdisplay() == null ? other.getIsdisplay() == null : this.getIsdisplay().equals(other.getIsdisplay()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getChangetime() == null ? other.getChangetime() == null : this.getChangetime().equals(other.getChangetime()));
     }
@@ -163,6 +175,7 @@ public class WxuserVO implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getReferrerid() == null) ? 0 : getReferrerid().hashCode());
         result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getIsdisplay() == null) ? 0 : getIsdisplay().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getChangetime() == null) ? 0 : getChangetime().hashCode());
         return result;

@@ -50,6 +50,11 @@ public class MessageUtil {
      * 事件类型：subscribe(订阅) 
      */  
     public static final String EVENT_TYPE_SUBSCRIBE = "subscribe";  
+    
+    /** 
+     * 事件类型：scan(扫码) 
+     */  
+    public static final String EVENT_TYPE_SCAN = "SCAN";  
   
     /** 
      * 事件类型：unsubscribe(取消订阅) 

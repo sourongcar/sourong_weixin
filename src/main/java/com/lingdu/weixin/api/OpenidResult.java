@@ -4,7 +4,7 @@ public class OpenidResult extends Result {
 	private String access_token;
 	private String refresh_token;
 	private String openid;
-	private long expires_in;
+	private Integer expires_in;
 	private String scope;
 
 	public String getAccess_token() {
@@ -31,11 +31,11 @@ public class OpenidResult extends Result {
 		this.openid = openid;
 	}
 
-	public long getExpires_in() {
+	public Integer getExpires_in() {
 		return expires_in;
 	}
 
-	public void setExpires_in(long expires_in) {
+	public void setExpires_in(Integer expires_in) {
 		this.expires_in = expires_in;
 	}
 

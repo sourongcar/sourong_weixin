@@ -546,62 +546,52 @@ public class WxuserVOExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andReferreridEqualTo(String value) {
+        public Criteria andReferreridEqualTo(Integer value) {
             addCriterion("referrerID =", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridNotEqualTo(String value) {
+        public Criteria andReferreridNotEqualTo(Integer value) {
             addCriterion("referrerID <>", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridGreaterThan(String value) {
+        public Criteria andReferreridGreaterThan(Integer value) {
             addCriterion("referrerID >", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridGreaterThanOrEqualTo(String value) {
+        public Criteria andReferreridGreaterThanOrEqualTo(Integer value) {
             addCriterion("referrerID >=", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridLessThan(String value) {
+        public Criteria andReferreridLessThan(Integer value) {
             addCriterion("referrerID <", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridLessThanOrEqualTo(String value) {
+        public Criteria andReferreridLessThanOrEqualTo(Integer value) {
             addCriterion("referrerID <=", value, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridLike(String value) {
-            addCriterion("referrerID like", value, "referrerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReferreridNotLike(String value) {
-            addCriterion("referrerID not like", value, "referrerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReferreridIn(List<String> values) {
+        public Criteria andReferreridIn(List<Integer> values) {
             addCriterion("referrerID in", values, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridNotIn(List<String> values) {
+        public Criteria andReferreridNotIn(List<Integer> values) {
             addCriterion("referrerID not in", values, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridBetween(String value1, String value2) {
+        public Criteria andReferreridBetween(Integer value1, Integer value2) {
             addCriterion("referrerID between", value1, value2, "referrerid");
             return (Criteria) this;
         }
 
-        public Criteria andReferreridNotBetween(String value1, String value2) {
+        public Criteria andReferreridNotBetween(Integer value1, Integer value2) {
             addCriterion("referrerID not between", value1, value2, "referrerid");
             return (Criteria) this;
         }
@@ -663,6 +653,66 @@ public class WxuserVOExample implements Serializable {
 
         public Criteria andRoleNotBetween(Integer value1, Integer value2) {
             addCriterion("role not between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayIsNull() {
+            addCriterion("isDisplay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayIsNotNull() {
+            addCriterion("isDisplay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayEqualTo(Integer value) {
+            addCriterion("isDisplay =", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayNotEqualTo(Integer value) {
+            addCriterion("isDisplay <>", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayGreaterThan(Integer value) {
+            addCriterion("isDisplay >", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayGreaterThanOrEqualTo(Integer value) {
+            addCriterion("isDisplay >=", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayLessThan(Integer value) {
+            addCriterion("isDisplay <", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayLessThanOrEqualTo(Integer value) {
+            addCriterion("isDisplay <=", value, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayIn(List<Integer> values) {
+            addCriterion("isDisplay in", values, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayNotIn(List<Integer> values) {
+            addCriterion("isDisplay not in", values, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayBetween(Integer value1, Integer value2) {
+            addCriterion("isDisplay between", value1, value2, "isdisplay");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdisplayNotBetween(Integer value1, Integer value2) {
+            addCriterion("isDisplay not between", value1, value2, "isdisplay");
             return (Criteria) this;
         }
 

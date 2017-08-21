@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lingdu.common.util.MessageUtil;
 import com.lingdu.weixin.api.UserInfo;
 import com.lingdu.weixin.api.WeixinApi;
 import com.lingdu.weixin.message.WeixinMessageUtil;
@@ -21,14 +22,14 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 
 	@Override
 	public boolean match(WeixinRequest request) throws Throwable {
-		return request.getMsgType().equals("event")
-				&& (request.getEvent().equals("subscribe") || request.getEvent().equals("SCAN"));
+		return request.getMsgType().equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)
+				&& (request.getEvent().equals(MessageUtil.EVENT_TYPE_SUBSCRIBE) || request.getEvent().equals(MessageUtil.EVENT_TYPE_SCAN));
 	}
 
 	@Override
 	public String processMsg(WeixinRequest request) throws Throwable {
 		String openId = request.getFromUserName();
-		String referrerId = request.getEventKey() == null ? null : request.getEventKey().substring("qrscene_".length());
+		Integer referrerId = request.getEventKey() == null ? null : Integer.parseInt(request.getEventKey().substring("qrscene_".length()));
 		WxuserVOExample example = new WxuserVOExample();
 		example.createCriteria().andOpenidEqualTo(openId);
 		List<WxuserVO> users = mapper.selectByExample(example);
@@ -39,11 +40,13 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 			WxuserVO entity = new WxuserVO();
 			entity.setUserid(user.getUserid());
 			if (user.getUserphone() == null) {// 未注册，更新上家
-				entity.setReferrerid(referrerId);
+				user.setReferrerid(referrerId);
 			}
+			user.setCreatetime(null);
+			user.setChangetime(null);
 			entity.setNickname(userInfo.getNickname());
 			entity.setUserphoto(userInfo.getHeadimgurl());
-			mapper.updateByPrimaryKeySelective(entity);
+			mapper.updateByPrimaryKey(entity);
 		} else {// 没关注过
 			user = new WxuserVO();
 			user.setOpenid(openId);

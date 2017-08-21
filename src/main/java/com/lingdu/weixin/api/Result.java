@@ -1,14 +1,14 @@
 package com.lingdu.weixin.api;
 
 public class Result {
-	private int errcode;
+	private Integer errcode;
 	private String errmsg;
 
-	public int getErrcode() {
+	public Integer getErrcode() {
 		return errcode;
 	}
 
-	public void setErrcode(int errcode) {
+	public void setErrcode(Integer errcode) {
 		this.errcode = errcode;
 	}
 

@@ -42,7 +42,7 @@ public class WeixinController {
 		logger.info("verify() -----> 开始验证 \n");
 
 		logger.info("接受参数：" + verify + "\n");
-
+		response.setCharacterEncoding("utf-8");
 		if (verify.getSignature() != null) {
 			if (SignUtil.validSign(verify.getSignature(), ConfigUtil.get("token"), verify.getTimestamp(),
 					verify.getNonce())) {
