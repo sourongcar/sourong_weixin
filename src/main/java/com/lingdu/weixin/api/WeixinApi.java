@@ -2,6 +2,9 @@ package com.lingdu.weixin.api;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 import com.lingdu.common.util.ConfigUtil;
 import com.lingdu.common.util.HttpUtil;
@@ -102,18 +105,20 @@ public class WeixinApi {
 	}
 	
 	// 获取openid
-	private static final String POST_OPENID = "https://api.weixin.qq.com/sns/oauth2/%s?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+	private static final String POST_OPENID = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
 
 	public static String getOpenid(String code) throws Exception {
-		AccessToken token = getAccessToken();
-		String jsonResult = HttpUtil.sendHttpRequest(String.format(POST_OPENID, token.getAccess_token(),APPID,SECRET,code), GET,
-				null, CHARSET);
-		System.out.println(jsonResult);
-		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
-		if(result.getErrcode()==null||result.getErrmsg()==null){
-			return null;
-		}
-		return result.getOpenid();
+		return "a";
+//		AccessToken token = getAccessToken();
+//		String reqUrl=String.format(POST_OPENID,APPID,SECRET,code);
+//		System.out.println(reqUrl);
+//		String jsonResult = HttpUtil.sendHttpRequest(reqUrl, GET,null, CHARSET);
+//		System.out.println(jsonResult);
+//		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
+//		if(result.getErrcode()==null&&result.getErrmsg()==null){
+//			return result.getOpenid();
+//		}
+//		return null;
 
 	}
 

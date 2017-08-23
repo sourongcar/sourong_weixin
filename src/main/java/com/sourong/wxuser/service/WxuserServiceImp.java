@@ -25,4 +25,32 @@ public class WxuserServiceImp implements WxuserService {
 			return null;
 	}
 
+	//更改role信息
+		@Override
+		public int upde(String openid,int role) {
+			WxuserVOExample example =new WxuserVOExample();
+			example.createCriteria().andOpenidEqualTo(openid);
+			WxuserVO user=new WxuserVO();
+			user.setRole(role);
+			return mapper.updateByExampleSelective( user,example);
+		}
+	//查询信息
+		@Override
+		public List<WxuserVO> select(String openid) {
+			WxuserVO up=get(openid);//上家
+			WxuserVOExample example= new WxuserVOExample();
+			//创建查询条件Referrerid = up.getUserid
+			example.createCriteria().andReferreridEqualTo(up.getUserid());
+			List<WxuserVO> list= mapper.selectByExample(example);
+			for(WxuserVO u:list){
+				example.or().andReferreridEqualTo(u.getUserid());
+			}
+			return mapper.selectByExample(example);
+		}
+
+		@Override
+		public int updateInfo(WxuserVO user) {
+			return mapper.updateByPrimaryKey(user);
+		}
+
 }

@@ -64,5 +64,11 @@ public class MessageUtil {
     /** 
      * 事件类型：CLICK(自定义菜单点击事件) 
      */  
-    public static final String EVENT_TYPE_CLICK = "CLICK";  
+    public static final String EVENT_TYPE_CLICK = "CLICK";
+    
+    /** 
+     * 二维码参数前缀：qrscene_ 
+     */  
+    public static final String PREFIX_QRCODE_PARAM = "qrscene_";
+    
 }

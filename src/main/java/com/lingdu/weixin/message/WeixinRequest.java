@@ -17,12 +17,19 @@ public class WeixinRequest {
 	private String Event;
 	private String EventKey;
 	private String Ticket;
+	private String MenuId;
 	//语音
 	private String Recognition;
 	private String Format;
 	private String MediaId;
 	
 	
+	public String getMenuId() {
+		return MenuId;
+	}
+	public void setMenuId(String menuId) {
+		MenuId = menuId;
+	}
 	public String getPicUrl() {
 		return PicUrl;
 	}
