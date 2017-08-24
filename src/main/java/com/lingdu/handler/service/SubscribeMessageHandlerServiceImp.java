@@ -37,16 +37,21 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 		UserInfo userInfo = WeixinApi.getUserInfo(openId);
 		if (users != null && users.size() == 1) {// 关注过
 			user = users.get(0);
-			WxuserVO entity = new WxuserVO();
-			entity.setUserid(user.getUserid());
+			//WxuserVO entity = new WxuserVO();
+			//entity.setUserid(user.getUserid());
 			if (user.getUserphone() == null) {// 未注册，更新上家
 				user.setReferrerid(referrerId);
 			}
+			if(user.getIsdisplay()==0){
+				user.setIsdisplay(1);
+			}
 			user.setCreatetime(null);
 			user.setChangetime(null);
-			entity.setNickname(userInfo.getNickname());
-			entity.setUserphoto(userInfo.getHeadimgurl());
-			mapper.updateByPrimaryKey(entity);
+			//entity.setNickname(userInfo.getNickname());
+			//entity.setUserphoto(userInfo.getHeadimgurl());
+			System.out.println(user);
+			//System.out.println(entity);
+			mapper.updateByPrimaryKeySelective(user);
 		} else {// 没关注过
 			user = new WxuserVO();
 			user.setOpenid(openId);
