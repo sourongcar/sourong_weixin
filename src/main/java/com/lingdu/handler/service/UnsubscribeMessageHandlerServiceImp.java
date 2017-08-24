@@ -32,7 +32,7 @@ public class UnsubscribeMessageHandlerServiceImp implements MessageHandlerServic
 			WxuserVO vo = users_list.get(0);
 			System.out.println(vo);
 			vo.setIsdisplay(0);
-			mapper.updateByPrimaryKeySelective(vo);
+			mapper.updateByPrimaryKey(vo);
 		}
 		return "";
 	}

@@ -68,6 +68,7 @@ public class WeixinController {
 	@RequestMapping(value = "/WeChatAPI", method = RequestMethod.POST, produces = "application/xml;charset=UTF-8")
 	public void ToReceiveMessagesFromWeChat(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+		response.setCharacterEncoding("utf-8");
 		InputStream input = request.getInputStream();
 		logger.info("接收到请求..... \n");
 		String msgId = null;

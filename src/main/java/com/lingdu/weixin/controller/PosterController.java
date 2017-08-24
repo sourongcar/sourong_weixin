@@ -1,10 +1,17 @@
 package com.lingdu.weixin.controller;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lingdu.common.util.ConfigUtil;
 import com.lingdu.weixin.api.QRTicket;
@@ -42,10 +49,29 @@ public class PosterController {
 			map.addAttribute("qrimg", String.format(ConfigUtil.get("qrshow"), qrTic.getTicket()));
 			map.addAttribute("headimg", user.getUserphoto());
 			PosterVO poster=posterService.getRandom();
-			map.addAttribute("poster", ConfigUtil.get("saveImage")+poster.getPosterurl());
+			map.addAttribute("poster", poster.getPosterurl());
 			return "poster";
 		}else
 			return "redirect:http://www.sourongdaojia.net";
+	}
+	@RequestMapping("/proxy")
+	public void imgProxy(String target,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		HttpURLConnection conn = null;
+		// 创建URL对象
+		URL url = new URL(target);
+		// 打开http连接
+		conn = (HttpURLConnection) url.openConnection();
+		conn.setDoInput(true);// 从对方服务器读取数据
+		// 不使用缓存
+		conn.setUseCaches(false);
+		byte[] buf=new byte[1024];
+		int read=-1;
+		try(InputStream in=conn.getInputStream();OutputStream out=response.getOutputStream()){
+			while(-1!=(read=in.read(buf))){
+				out.write(buf, 0, read);
+			}
+			out.flush();
+		}
 	}
 
 }

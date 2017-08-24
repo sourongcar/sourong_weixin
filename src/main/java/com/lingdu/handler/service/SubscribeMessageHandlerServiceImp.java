@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingdu.common.util.MessageUtil;
+import com.lingdu.weixin.api.CustomMessage;
+import com.lingdu.weixin.api.TextCustomMessage;
 import com.lingdu.weixin.api.UserInfo;
 import com.lingdu.weixin.api.WeixinApi;
 import com.lingdu.weixin.message.WeixinMessageUtil;
@@ -23,13 +25,15 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 	@Override
 	public boolean match(WeixinRequest request) throws Throwable {
 		return request.getMsgType().equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)
-				&& (request.getEvent().equals(MessageUtil.EVENT_TYPE_SUBSCRIBE) || request.getEvent().equals(MessageUtil.EVENT_TYPE_SCAN));
+				&& (request.getEvent().equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)
+						|| request.getEvent().equals(MessageUtil.EVENT_TYPE_SCAN));
 	}
 
 	@Override
 	public String processMsg(WeixinRequest request) throws Throwable {
 		String openId = request.getFromUserName();
-		Integer referrerId = request.getEventKey().startsWith(MessageUtil.PREFIX_QRCODE_PARAM) ? Integer.parseInt(request.getEventKey().substring(MessageUtil.PREFIX_QRCODE_PARAM.length())):null ;
+		Integer referrerId = request.getEventKey().startsWith(MessageUtil.PREFIX_QRCODE_PARAM)
+				? Integer.parseInt(request.getEventKey().substring(MessageUtil.PREFIX_QRCODE_PARAM.length())) : null;
 		WxuserVOExample example = new WxuserVOExample();
 		example.createCriteria().andOpenidEqualTo(openId);
 		List<WxuserVO> users = mapper.selectByExample(example);
@@ -37,21 +41,21 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 		UserInfo userInfo = WeixinApi.getUserInfo(openId);
 		if (users != null && users.size() == 1) {// 关注过
 			user = users.get(0);
-			//WxuserVO entity = new WxuserVO();
-			//entity.setUserid(user.getUserid());
+			// WxuserVO entity = new WxuserVO();
+			// entity.setUserid(user.getUserid());
 			if (user.getUserphone() == null) {// 未注册，更新上家
 				user.setReferrerid(referrerId);
 			}
-			if(user.getIsdisplay()==0){
+			if (user.getIsdisplay() == 0) {
 				user.setIsdisplay(1);
 			}
 			user.setCreatetime(null);
 			user.setChangetime(null);
-			//entity.setNickname(userInfo.getNickname());
-			//entity.setUserphoto(userInfo.getHeadimgurl());
+			user.setNickname(userInfo.getNickname());
+			user.setUserphoto(userInfo.getHeadimgurl());
 			System.out.println(user);
-			//System.out.println(entity);
-			mapper.updateByPrimaryKeySelective(user);
+			// System.out.println(entity);
+			mapper.updateByPrimaryKey(user);
 		} else {// 没关注过
 			user = new WxuserVO();
 			user.setOpenid(openId);
@@ -60,6 +64,15 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 			user.setNickname(userInfo.getNickname());
 			user.setUserphoto(userInfo.getHeadimgurl());
 			mapper.insertSelective(user);
+		}
+		if (referrerId != null) {
+			WxuserVO referrer = mapper.selectByPrimaryKey(referrerId);
+			if (referrer != null) {
+				TextCustomMessage message = new TextCustomMessage();
+				message.setTouser(referrer.getOpenid());
+				message.setContent("用户"+user.getNickname()+"成功通过扫描您的二维码关注本公众号");
+				WeixinApi.sendCustomMessage(message);
+			}
 		}
 		WeixinTextResponse response = new WeixinTextResponse();
 		response.setFromUserName(request.getToUserName());

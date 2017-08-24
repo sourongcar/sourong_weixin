@@ -50,6 +50,9 @@ public class WxuserServiceImp implements WxuserService {
 
 		@Override
 		public int updateInfo(WxuserVO user) {
+			if(user.getRole().equals(0)){
+				user.setRole(1);
+			}
 			return mapper.updateByPrimaryKey(user);
 		}
 
