@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingdu.common.util.MessageUtil;
-import com.lingdu.weixin.api.CustomMessage;
 import com.lingdu.weixin.api.TextCustomMessage;
 import com.lingdu.weixin.api.UserInfo;
 import com.lingdu.weixin.api.WeixinApi;
@@ -65,12 +64,12 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 			user.setUserphoto(userInfo.getHeadimgurl());
 			mapper.insertSelective(user);
 		}
-		if (referrerId != null) {
+		if (user.getRole() == 0 && referrerId != null) {
 			WxuserVO referrer = mapper.selectByPrimaryKey(referrerId);
 			if (referrer != null) {
 				TextCustomMessage message = new TextCustomMessage();
 				message.setTouser(referrer.getOpenid());
-				message.setContent("用户"+user.getNickname()+"成功通过扫描您的二维码关注本公众号");
+				message.setContent("用户" + user.getNickname() + "成功通过扫描您的二维码关注本公众号");
 				WeixinApi.sendCustomMessage(message);
 			}
 		}

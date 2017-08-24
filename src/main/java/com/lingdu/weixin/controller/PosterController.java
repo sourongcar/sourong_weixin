@@ -43,7 +43,7 @@ public class PosterController {
 		if(user!=null&&user.getRole()==2){
 			//to get qr code
 			QRTicketRequest qrTicReq = new QRTicketRequest();
-			qrTicReq.addSceneId(user.getOpenid());
+			qrTicReq.addSceneId(user.getUserid().toString());
 			QRTicket qrTic = WeixinApi.getQrTicket(qrTicReq);
 			//获取二维码、头像、模板
 			map.addAttribute("qrimg", String.format(ConfigUtil.get("qrshow"), qrTic.getTicket()));

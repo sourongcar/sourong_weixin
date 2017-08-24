@@ -15,6 +15,7 @@ import com.lingdu.weixin.api.WeixinApi;
 @RequestMapping("/weixin")
 @Controller
 public class MenuController {
+	public static final String EVENT_KEY_BOOK_SERVICE = "book_service";
 
 	@RequestMapping("authrization")
 	public String verify() throws IOException {
@@ -43,7 +44,7 @@ public class MenuController {
 			b12.setType(Button.TYPE_VIEW);
 			Button b13 = new Button();
 			b13.setName("服务预约");
-			b13.setKey("book_service");
+			b13.setKey(EVENT_KEY_BOOK_SERVICE);
 			b13.setType(Button.TYPE_CLICK);
 			Button b2 = new Button();
 			b2.setName("我的");
