@@ -29,33 +29,42 @@ public class PosterController {
 	private WxuserService service;
 	@Autowired
 	private PosterService posterService;
-	
+
 	@RequestMapping("/create")
-	public String CreatePoster(String code,ModelMap map) throws Exception{
-		if(code==null){
+	public String CreatePoster(String code, ModelMap map) throws Exception {
+		if (code == null) {
 			return "redirect:http://www.sourongdaojia.net";
 		}
-		String openid=WeixinApi.getOpenid(code);
-		if(openid==null){
+		String openid = WeixinApi.getOpenid(code);
+		if (openid == null) {
 			return "redirect:http://www.sourongdaojia.net";
 		}
-		WxuserVO user=service.get(openid);
-		if(user!=null&&user.getRole()==2){
-			//to get qr code
-			QRTicketRequest qrTicReq = new QRTicketRequest();
-			qrTicReq.addSceneId(user.getUserid().toString());
-			QRTicket qrTic = WeixinApi.getQrTicket(qrTicReq);
-			//获取二维码、头像、模板
-			map.addAttribute("qrimg", String.format(ConfigUtil.get("qrshow"), qrTic.getTicket()));
-			map.addAttribute("headimg", user.getUserphoto());
-			PosterVO poster=posterService.getRandom();
-			map.addAttribute("poster", poster.getPosterurl());
-			return "poster";
-		}else
+		WxuserVO user = service.get(openid);
+		if (user != null) {
+			if (user.getRole() == 2) {
+				// to get qr code
+				QRTicketRequest qrTicReq = new QRTicketRequest();
+				qrTicReq.addSceneId(user.getUserid().toString());
+				QRTicket qrTic = WeixinApi.getQrTicket(qrTicReq);
+				// 获取二维码、头像、模板
+				map.addAttribute("qrimg", String.format(ConfigUtil.get("qrshow"), qrTic.getTicket()));
+				map.addAttribute("headimg", user.getUserphoto());
+				PosterVO poster = posterService.getRandom();
+				map.addAttribute("poster", poster.getPosterurl());
+				return "poster";
+			} else if (user.getRole() == 1) {
+				return "hehuoren";
+			} else if (user.getRole() == 0) {
+				return "personinfo";
+			} else {
+				return "redirect:http://www.sourongdaojia.net";
+			}
+		} else
 			return "redirect:http://www.sourongdaojia.net";
 	}
+
 	@RequestMapping("/proxy")
-	public void imgProxy(String target,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public void imgProxy(String target, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpURLConnection conn = null;
 		// 创建URL对象
 		URL url = new URL(target);
@@ -64,10 +73,10 @@ public class PosterController {
 		conn.setDoInput(true);// 从对方服务器读取数据
 		// 不使用缓存
 		conn.setUseCaches(false);
-		byte[] buf=new byte[1024];
-		int read=-1;
-		try(InputStream in=conn.getInputStream();OutputStream out=response.getOutputStream()){
-			while(-1!=(read=in.read(buf))){
+		byte[] buf = new byte[1024];
+		int read = -1;
+		try (InputStream in = conn.getInputStream(); OutputStream out = response.getOutputStream()) {
+			while (-1 != (read = in.read(buf))) {
 				out.write(buf, 0, read);
 			}
 			out.flush();
