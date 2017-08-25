@@ -86,7 +86,7 @@
 
         $('#showIOSDialog2').on('click', function(){
 			$.ajax({
-				url:"update.action",
+				url:"${path}/weixin/update.action",
 				dataType:'json',
 				data:{openid:$(this).data('openid')},
 				success:function(data){

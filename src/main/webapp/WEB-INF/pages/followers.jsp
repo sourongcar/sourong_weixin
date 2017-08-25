@@ -53,7 +53,7 @@ $.mobile.pushStateEnabled = false;
         title : '我的下家',
         collapsed: false,
         data: [
-			<c:forEach items="${partner }" var="p" varStatus="status">
+			<c:forEach items="<img style='height:1.5em;vertical-align: middle;margin:0 0.5em;' src='${p.userphoto}'>${partner }" var="p" varStatus="status">
 			{ "id": ${p.userid}, "title": "${p.nickname}"<c:if test="${p.referrerid ne user.userid}">,"pid":${p.referrerid}</c:if> }<c:if test="${status.last eq false}">,</c:if>
 			</c:forEach>
         ]

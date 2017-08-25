@@ -114,7 +114,7 @@
         });
         $("#confirm").click(function(){
         	$.ajax({
-        		url:"editinfo.action",
+        		url:"${path}/weixin/editinfo.action",
         		type:"post",
         		data:{phone:$("#userphone").val(),
         			name:$("#username").val()+($(":radio:checked").attr("id")=='male'?'先生':'女士'),

@@ -53,8 +53,10 @@ public class PosterController {
 				map.addAttribute("poster", poster.getPosterurl());
 				return "poster";
 			} else if (user.getRole() == 1) {
+				map.addAttribute("openid", openid);
 				return "hehuoren";
 			} else if (user.getRole() == 0) {
+				map.addAttribute("openid", openid);
 				return "personinfo";
 			} else {
 				return "redirect:http://www.sourongdaojia.net";
@@ -65,6 +67,12 @@ public class PosterController {
 
 	@RequestMapping("/proxy")
 	public void imgProxy(String target, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if(target==null){
+			return;
+		}
+		if(!target.startsWith("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=")&&!target.startsWith("http://wx.qlogo.cn/mmopen/")){
+			return;
+		}
 		HttpURLConnection conn = null;
 		// 创建URL对象
 		URL url = new URL(target);
