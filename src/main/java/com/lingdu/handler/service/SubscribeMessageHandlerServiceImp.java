@@ -31,8 +31,11 @@ public class SubscribeMessageHandlerServiceImp implements MessageHandlerService 
 	@Override
 	public String processMsg(WeixinRequest request) throws Throwable {
 		String openId = request.getFromUserName();
-		Integer referrerId = MessageUtil.EVENT_TYPE_SUBSCRIBE.equals(request.getEvent())?(request.getEventKey().startsWith(MessageUtil.PREFIX_QRCODE_PARAM)
-				? Integer.parseInt(request.getEventKey().substring(MessageUtil.PREFIX_QRCODE_PARAM.length())) : null): Integer.parseInt(request.getEventKey());
+		Integer referrerId = MessageUtil.EVENT_TYPE_SUBSCRIBE.equals(request.getEvent())
+				? (request.getEventKey() != null && request.getEventKey().startsWith(MessageUtil.PREFIX_QRCODE_PARAM)
+						? Integer.parseInt(request.getEventKey().substring(MessageUtil.PREFIX_QRCODE_PARAM.length()))
+						: null)
+				: (request.getEventKey() == null ? null : Integer.parseInt(request.getEventKey()));
 		WxuserVOExample example = new WxuserVOExample();
 		example.createCriteria().andOpenidEqualTo(openId);
 		List<WxuserVO> users = mapper.selectByExample(example);
