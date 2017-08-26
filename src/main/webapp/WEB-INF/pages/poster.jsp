@@ -24,7 +24,7 @@
     <div >
         <article class="weui-article" style="padding: 0 0;">
             <section>
-                <p style="text-align: center">二维码已生成,长按复制分享即可</p>
+                <p id="info" style="text-align: center"></p>
             </section>
         </article>
     </div>
@@ -54,11 +54,17 @@ window.onload=function(){
 	var temp=$("#temp")[0];
 	var out=$("#out")[0];
 	var ctx = canvas.getContext('2d');
-	ctx.drawImage(temp,0,0);
-	ctx.drawImage(qrcode,120,480,240,240);
-	ctx.drawImage(head,165,525,30,30);
-	var url = canvas.toDataURL("image/png");
-	out.src=url;
+	try{
+		ctx.drawImage(temp,0,0);
+		ctx.drawImage(qrcode,120,480,240,240);
+		ctx.drawImage(head,165,525,30,30);
+		var url = canvas.toDataURL("image/png");
+		out.src=url;
+		$('#info').text('二维码已生成,长按复制分享即可');
+	}
+	catch(e){
+		$('#info').text('二维码生成失败，请重试');
+	}
 }
 </script>
 </html>
