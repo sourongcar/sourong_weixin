@@ -83,16 +83,16 @@
     <div class="weui-dialog">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">修改成功</strong></div>
         <div class="weui-dialog__ft">
-            <a href="javascript:;" class="close weui-dialog__btn weui-dialog__btn_primary">取消</a>
+            <a href="javascript:close();" class="close weui-dialog__btn weui-dialog__btn_primary">确定</a>
         </div>
     </div>
 </div>
 <!--页脚-->
 <div style="margin-top:30px;" class="weui-footer">
     <p class="weui-footer__links">
-        <a href="main.html" class="weui-footer__link">搜融到家</a>
+        <a href="http://www.sourongdaojia.net/" class="weui-footer__link">搜融到家</a>
     </p>
-    <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+    <p class="weui-footer__text">Copyright &copy; www.sourongdaojia.net</p>
 </div>
 </body>
 <script src="${path }/resources/js/jquery-2.1.1.min.js"></script>

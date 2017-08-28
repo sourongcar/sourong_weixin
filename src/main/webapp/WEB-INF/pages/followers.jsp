@@ -32,9 +32,9 @@
 <!--页脚-->
 <div class="weui-footer weui-footer_fixed-bottom">
     <p class="weui-footer__links">
-        <a href="main.html" class="weui-footer__link">搜融到家</a>
+        <a href="http://www.sourongdaojia.net/" class="weui-footer__link">搜融到家</a>
     </p>
-    <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+    <p class="weui-footer__text">Copyright &copy; www.sourongdaojia.net</p>
 </div>
 </div>
             
@@ -48,19 +48,19 @@
 <script type="text/javascript">
 $.mobile.pushStateEnabled = false;
 <c:choose>
-<c:when test="${partner.length>0 }">
+<c:when test="${partner.size()>0 }">
     $("#tree").jqmtree({
         title : '我的下家',
         collapsed: false,
         data: [
-			<c:forEach items="<img style='height:1.5em;vertical-align: middle;margin:0 0.5em;' src='${p.userphoto}'>${partner }" var="p" varStatus="status">
+			<c:forEach items="${partner }" var="p" varStatus="status">
 			{ "id": ${p.userid}, "title": "${p.nickname}"<c:if test="${p.referrerid ne user.userid}">,"pid":${p.referrerid}</c:if> }<c:if test="${status.last eq false}">,</c:if>
 			</c:forEach>
         ]
     });
 </c:when>
 <c:otherwise>
-	$("#tree")。css({textAlign:'center',fontsize:'2rem'}).text("你还没有下家");
+	$("#tree").css({textAlign:'center',fontSize:'2rem'}).text("你还没有下家");
 </c:otherwise>
 </c:choose>
 

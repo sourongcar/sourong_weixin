@@ -18,7 +18,7 @@
 
     <!--logo-->
     <div class="page__ft">
-        <img src="${path }/resources/images/logo.png" />
+        <img src="${path }/resources/images/logo.png" />"D:/eclipse/workspace/sourong_weixin-1/WEB-INF/pages/followers.jsp"
     </div>
 <!--文字-->
     <div >
@@ -30,8 +30,8 @@
     </div>
 <fieldset style="width: 90%;margin:0 auto;line-height: 0">
     <div class="panel1" id="demo" style="">
-		<img id="qrcode" src="${qrimg }"  style="display:none;">
-		<img id="head" src="${headimg }"  style="display:none;">
+		<img id="qrcode" src="${path }/weixin/poster/proxy.action?target=${qrimg }"  style="display:none;">
+		<img id="head" src="${path }/weixin/poster/proxy.action?target=${headimg }"  style="display:none;">
 		<img id="temp" src="/img/${poster }"  style="display:none;">
 		<img id="out" style="width:100%">
 		<canvas width="480" height="800" style="width:100%;display:none" id="canvas"></canvas>
@@ -40,9 +40,9 @@
     <!--页脚-->
     <div class="weui-footer style="margin-top:5vw">
         <p class="weui-footer__links">
-            <a href="main.html" class="weui-footer__link">搜融到家</a>
+            <a href="http://www.sourongdaojia.net/" class="weui-footer__link">搜融到家</a>
         </p>
-        <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+    <p class="weui-footer__text">Copyright &copy; www.sourongdaojia.net</p>
     </div>
 </body>
 <script src="${path }/resources/js/jquery-2.1.1.min.js"></script>
@@ -57,7 +57,7 @@ window.onload=function(){
 	try{
 		ctx.drawImage(temp,0,0);
 		ctx.drawImage(qrcode,120,480,240,240);
-		ctx.drawImage(head,165,525,30,30);
+		ctx.drawImage(head,210,570,60,60);
 		var url = canvas.toDataURL("image/png");
 		out.src=url;
 		$('#info').text('二维码已生成,长按复制分享即可');

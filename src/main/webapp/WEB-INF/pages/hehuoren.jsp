@@ -54,9 +54,9 @@
 <!--页脚-->
 <div class="weui-footer">
     <p class="weui-footer__links">
-        <a href="main.html" class="weui-footer__link">搜融到家</a>
+        <a href="http://www.sourongdaojia.net/" class="weui-footer__link">搜融到家</a>
     </p>
-    <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+    <p class="weui-footer__text">Copyright &copy; www.sourongdaojia.net</p>
 </div>
 
 
