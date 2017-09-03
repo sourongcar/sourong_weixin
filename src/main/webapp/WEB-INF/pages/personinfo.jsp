@@ -122,7 +122,7 @@
     			dataType:'json',
     			success:function(data){
     				if(data=="success")
-						$('#successDialog').css('display','block');
+					WeixinJSBridge.call('closeWindow');
     				else
     					alert("请求失败");
     			},
