@@ -32,7 +32,7 @@
 <!--页脚-->
 <div class="weui-footer weui-footer_fixed-bottom">
     <p class="weui-footer__links">
-        <a href="http://www.sourongdaojia.net/" class="weui-footer__link">搜融到家</a>
+        <a href="" class="weui-footer__link">搜融到家</a>
     </p>
     <p class="weui-footer__text">Copyright &copy; www.sourongdaojia.net</p>
 </div>

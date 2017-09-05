@@ -64,6 +64,16 @@ public class WeixinApi {
 		System.out.println(jsonResult);
 		return JSONObject.parseObject(jsonResult, Result.class);
 	}
+	
+	private static final String GET_MENU = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=%s";
+	
+	public static MenuResult getMenu() throws IOException {
+		AccessToken token = getAccessToken();
+		String jsonResult = HttpUtil.sendHttpRequest(String.format(GET_MENU, token.getAccess_token()), GET,
+				null, CHARSET);
+		System.out.println(jsonResult);
+		return JSONObject.parseObject(jsonResult, MenuResult.class);
+	}
 
 	private static final String POST_UPLOAD = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s";
 
@@ -108,17 +118,17 @@ public class WeixinApi {
 	private static final String POST_OPENID = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
 
 	public static String getOpenid(String code) throws Exception {
-		return "a";
-//		AccessToken token = getAccessToken();
-//		String reqUrl=String.format(POST_OPENID,APPID,SECRET,code);
-//		System.out.println(reqUrl);
-//		String jsonResult = HttpUtil.sendHttpRequest(reqUrl, GET,null, CHARSET);
-//		System.out.println(jsonResult);
-//		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
-//		if(result.getErrcode()==null&&result.getErrmsg()==null){
-//			return result.getOpenid();
-//		}
-//		return null;
+//		return "a";
+		AccessToken token = getAccessToken();
+		String reqUrl=String.format(POST_OPENID,APPID,SECRET,code);
+		System.out.println(reqUrl);
+		String jsonResult = HttpUtil.sendHttpRequest(reqUrl, GET,null, CHARSET);
+		System.out.println(jsonResult);
+		OpenidResult result=JSONObject.parseObject(jsonResult, OpenidResult.class);
+		if(result.getErrcode()==null&&result.getErrmsg()==null){
+			return result.getOpenid();
+		}
+		return null;
 
 	}
 

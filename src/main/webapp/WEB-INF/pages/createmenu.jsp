@@ -16,11 +16,11 @@
 </div>
 <div class="weui-cells__title">填写账号密码</div>
 <!--完善信息的表单-->
-<div class="weui-cells weui-cells_form">
+<form method="post" action="menu.action" class="weui-cells weui-cells_form">
     <div class="weui-cell" id="name_input">
         <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="username" onclick="refreshName()" placeholder="账号" value="${user.username.replace("先生","").replace("女士","")}" onblur="checkName(this.value)"/>
+            <input class="weui-input" name="account" id="username" onclick="refreshName()" placeholder="账号" onblur="checkName(this.value)"/>
         </div>
     </div>
     <div class="weui-cells__tips" id="name_err" style="display: none;">姓名长度为2-4个字符</div>
@@ -30,16 +30,16 @@
             <label class="weui-label">密码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="userphone" type="password" onclick="refreshNum()" placeholder="密码" value="${user.userphone }" onblur="checkPhoneNum(this.value)"/>
+            <input class="weui-input" name="password" id="userphone" type="password" onclick="refreshNum()" placeholder="密码" onblur="checkPhoneNum(this.value)"/>
         </div>
     </div>
     <div class="weui-cells__tips" id="phone_err" style="display: none;">请输入有效的手机号码</div>
 
     <div class="weui-btn-area">
-        <button type="submit" onclick="checkSubmit()" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</button>
+        <button type="submit" onclick="return checkSubmit()" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</button>
     </div>
 
-</div>
+</form>
 <!--完善信息表单结束-->
 <!--确认弹框-->
 <div class="js_dialog" id="iosDialog1" style="display: none;">
@@ -91,22 +91,25 @@
         var name = $('#username').val();
         var phone = $('#userphone').val();
         if(name!=""&&phone!=""){
-        	$.ajax({
-        		url:"createmenu.action",
+        	/* $.ajax({
+        		url:"menu.action",
         		type:"post",
         		data:{password:$("#userphone").val(),account:$("#username").val()},
     			dataType:'json',
     			success:function(data){
     				if(data=="success")
-						alert("创建成功");
+						location="createmenu.action";
     				else
     					alert("账号或密码错误");
     			},
     			error:function(){
     				alert("请求失败");
     			}
-        	});
+        	}); */
+        	return true;
         }
+        else
+        	return false;
     }
 </script>
 </html>
