@@ -66,7 +66,7 @@
     <div class="weui-dialog">
         <div class="weui-dialog__bd">恭喜你成为搜融合伙人</div>
         <div class="weui-dialog__ft">
-            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">返回</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">关闭窗口</a>
         </div>
     </div>
 </div>
@@ -81,7 +81,7 @@
         var $iosDialog2 = $('#iosDialog2');
 
         $('.weui-dialog__btn').on('click', function(){
-            $(this).parents('.js_dialog').fadeOut(200);
+        	WeixinJSBridge.call('closeWindow');
         });
 
         $('#showIOSDialog2').on('click', function(){

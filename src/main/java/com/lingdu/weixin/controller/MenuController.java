@@ -51,11 +51,11 @@ public class MenuController {
 				throw new IOException("获取菜单失败");
 			}
 		} else {
-			return "redirect:authrization.action";
+			return "redirect:authorization.action";
 		}
 	}
 
-	@RequestMapping(value = "createmenu", method = RequestMethod.GET)
+	//@RequestMapping(value = "createmenu", method = RequestMethod.GET)
 	public String showMenu(ModelMap map, HttpSession session) throws IOException {
 		if (session.getAttribute("admin") == "true") {
 
@@ -102,7 +102,7 @@ public class MenuController {
 				throw new IOException("获取菜单失败");
 			}
 		} else {
-			return "redirect:authrization.action";
+			return "redirect:authorization.action";
 		}
 	}
 
