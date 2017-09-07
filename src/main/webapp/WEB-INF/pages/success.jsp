@@ -8,5 +8,22 @@
 </head>
 <body>
 <h2 style="text-align: center;font-size: 8vw">您已成为搜融合伙人</h2>
+<p id="show" style="text-align: center;font-size: 4vw"></p>
 </body>
+<script type="text/javascript">
+window.onload=function(){
+	var time=3;  
+	function closeWindow(){  
+		window.setTimeout(closeWindow,1000);  
+		if(time>0){  
+		document.getElementById("show").innerHTML=time+"秒后关闭当前窗口,返回微信公众号窗口";  
+		time--;  
+		
+		}else{  
+		WeixinJSBridge.call('closeWindow'); 
+		}
+	}
+	closeWindow();
+}
+</script>
 </html>
