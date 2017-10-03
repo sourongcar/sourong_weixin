@@ -544,6 +544,10 @@
                 case STATE_EDIT_BUTTON:
                     var i = target.index();
                     if (target.is(":last-child")) {
+                    	if(target.hasClass("nav-item-menu")){
+                    		target.removeClass("nav-item-menu").addClass("nav-item").children('ul').remove();
+                    		target.chlidren(".text").removeClass('nav-item');
+                    	}
                         target.addClass('nav-item-add').children('.text').text('');
                     }
                     else {
